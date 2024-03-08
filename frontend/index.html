@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Forum app</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>
+    <h1>CentraleSupélec Forum</h1>
+  </header>
+  <main>
+    <section id="posted-messages-section">
+      <ul id="posted-messages">
+        <li>Chat message 1</li>
+        <li>Chat message 2</li>
+        <li>Chat message 3</li>
+        <li>Chat message 4</li>
+        <li>Chat message 5</li>
+      </ul>
+    </section>
+    <section id="add-message">
+      <h3>Add a message</h3>
+      <form id="message-form">
+        <textarea placeholder="Write your message here" aria-label="Write your message here"></textarea>
+        <button id="comment-button" type="submit" onclick="update(event, msgs)">Comment</button>
+      </form>
+    </section>
+  </main>
+</body>
+<script src="script.js"></script>
+
+</html>
