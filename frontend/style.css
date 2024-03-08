@@ -1,23 +1,16 @@
 body {
   font-family: Arial, sans-serif;
-  color: #292524;
-  background-color: #fff;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 header {
-  font-size: Roboto;
   padding: 6px 20px;
   border-bottom: solid #e7e5e4 1px;
   color: #910035;
 }
 
-header h1 {
+h1 {
   margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -35,13 +28,14 @@ main {
   border-radius: 6px;
   padding: 10px 20px;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
 }
 
 #posted-messages {
   list-style-type: none;
   padding: 0;
-  width: 70%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   gap: 6px;

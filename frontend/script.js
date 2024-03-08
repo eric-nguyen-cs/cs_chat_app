@@ -7,21 +7,21 @@ function fact(n) {
 }
 
 function applique(f, tab) {
-  return tab.map(element => f(element))
+  return tab.map((element) => f(element));
 }
 
 const msgs = [
-    { "msg" : "Hello World" },
-    { "msg" : "Blah Blah" },
-    { "msg" : "I love cats" }
+  { msg: 'Hello World' },
+  { msg: 'Blah Blah' },
+  { msg: 'I love cats' },
 ];
 
 function update(event, new_messages) {
   event.preventDefault();
-  const messageList = document.getElementById("posted-messages");
+  const messageList = document.getElementById('posted-messages');
 
-  const newMessages = new_messages.map(message => {
-    const listItem = document.createElement("li");
+  const newMessages = new_messages.map((message) => {
+    const listItem = document.createElement('li');
     listItem.textContent = message.msg;
     return listItem;
   });
@@ -29,6 +29,6 @@ function update(event, new_messages) {
   messageList.replaceChildren(...newMessages);
 }
 
-document.querySelector('form').addEventListener('submit', function(event) { 
-  event.preventDefault(); 
-}); 
+document.querySelector('form').addEventListener('submit', function (event) {
+  event.preventDefault();
+});
