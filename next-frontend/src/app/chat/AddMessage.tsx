@@ -3,9 +3,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 export function AddMessage() {
   return (
-    <div className="flex w-full gap-2">
+    <div className="flex flex-col w-full gap-2">
       <Textarea placeholder="Type your message here." />
-      <Button>Send message</Button>
+      <Button className="self-end">Send message</Button>
     </div>
   );
 }
