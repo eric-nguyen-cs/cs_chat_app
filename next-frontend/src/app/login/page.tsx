@@ -8,7 +8,7 @@ import { FormEvent } from "react";
 export default function Login() {
   const sendLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await fetch(apiUrl, {
+    const response = await fetch(apiUrl + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
