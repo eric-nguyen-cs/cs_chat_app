@@ -9,6 +9,6 @@ interface UserWithPassword extends User {
 interface Message {
   id: number;
   username: string;
-  contents: string;
+  content: string;
   writtenAt: Date;
 }
