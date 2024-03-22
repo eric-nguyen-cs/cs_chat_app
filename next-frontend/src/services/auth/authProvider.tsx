@@ -1,54 +1,57 @@
-import { ReactNode, useEffect, useState } from "react";
-import { LocalEmail, LocalName } from "../localStorage";
-import { AuthContext, AuthContextType } from "./authContext";
-import { apiUrl } from "@/services/environment";
+import { ReactNode, useEffect, useState } from 'react';
+import { LocalToken, LocalUsername } from '../localStorage';
+import { AuthContext, AuthContextType } from './authContext';
+import { apiUrl } from '@/services/environment';
 
 type Props = {
   children: ReactNode;
 };
 
 export const AuthProvider: React.FC<Props> = (props) => {
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    if (userEmail) return;
-    const storedEmail = LocalEmail.get();
-    const storedName = LocalName.get();
-    if (storedEmail) {
-      setUserEmail(storedEmail);
-      setUserName(storedName);
+    if (token) return;
+    const storedUsername = LocalUsername.get();
+    const storedToken = LocalToken.get();
+    if (storedToken) {
+      setToken(storedToken);
+      setUsername(storedUsername);
     }
   }, []);
 
   const contextValue: AuthContextType = {
-    email: userEmail,
-    name: userName,
-    login: async ({ email }) => {
-      if (email.length == 0) {
-        throw new Error("Email was not provided");
+    username,
+    token,
+    login: async ({ username, password }) => {
+      if (username.length == 0) {
+        throw new Error('Username was not provided');
+      }
+      if (password.length == 0) {
+        throw new Error('Password was not provided');
       }
       try {
-        const body = { email };
+        const body = { username, password };
         const res = await fetch(`${apiUrl}/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
         });
-        const { email: resEmail, name: resName } = await res.json();
-        setUserEmail(resEmail);
-        setUserName(resName);
-        LocalEmail.set(resEmail);
-        LocalName.set(resName);
+        const { username: resUsername, token: resToken } = await res.json();
+        setToken(resToken);
+        setUsername(resUsername);
+        LocalToken.set(resToken);
+        LocalUsername.set(resUsername);
       } catch (error) {
         throw error;
       }
     },
     logout: () => {
-      LocalEmail.reset();
-      LocalName.reset();
-      setUserEmail(null);
-      setUserName(null);
+      LocalToken.reset();
+      LocalUsername.reset();
+      setToken(null);
+      setUsername(null);
     },
   };
 

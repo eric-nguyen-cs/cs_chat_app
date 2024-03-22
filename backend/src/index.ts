@@ -45,7 +45,7 @@ app.post('/login', (req, res) => {
       expiresIn: '2h',
     });
     // Send the JWT token to the user in the response
-    res.json({ token });
+    res.json({ username, token });
   } else {
     res.status(400).send('Invalid username or password');
   }
@@ -107,7 +107,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const port = 3000;
+const port = 8000;
 httpServer.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

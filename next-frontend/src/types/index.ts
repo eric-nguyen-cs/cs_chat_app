@@ -1,14 +1,14 @@
-interface User {
+export interface User {
   username: string;
 }
 
-interface UserWithPassword extends User {
+export interface UserWithPassword extends User {
   password: string;
 }
 
-interface Message {
+export interface Message {
   id: number;
   username: string;
   content: string;
-  writtenAt: Date;
+  writtenAt: number;
 }
