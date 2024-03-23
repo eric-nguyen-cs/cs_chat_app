@@ -2,24 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { apiUrl } from "@/services/environment";
+import { useAuthContext } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function Login() {
+  const { signup } = useAuthContext();
   const router = useRouter();
   const sendSignUp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch(apiUrl + "/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: event.currentTarget.username.value,
-          password: event.currentTarget.password.value,
-        }),
+      await signup({
+        username: event.currentTarget.username.value,
+        password: event.currentTarget.password.value,
       });
       await router.push("/");
     } catch {

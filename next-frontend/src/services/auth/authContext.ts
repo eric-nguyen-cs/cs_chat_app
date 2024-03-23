@@ -9,6 +9,7 @@ export interface Credentials {
 
 export interface AuthContextType {
   login: (creds: Credentials) => Promise<void>;
+  signup: (creds: Credentials) => Promise<void>;
   logout: () => void;
   username: string | null;
   token: string | null;

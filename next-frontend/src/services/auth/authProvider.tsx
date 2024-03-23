@@ -49,6 +49,29 @@ export const AuthProvider: React.FC<Props> = (props) => {
         throw error;
       }
     },
+    signup: async ({ username, password }) => {
+      if (username.length == 0) {
+        throw new Error("Username was not provided");
+      }
+      if (password.length == 0) {
+        throw new Error("Password was not provided");
+      }
+      try {
+        const body = { username, password };
+        const res = await fetch(`${apiUrl}/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const { username: resUsername, token: resToken } = await res.json();
+        setToken(resToken);
+        setUsername(resUsername);
+        LocalToken.set(resToken);
+        LocalUsername.set(resUsername);
+      } catch (error) {
+        throw error;
+      }
+    },
     logout: () => {
       LocalToken.reset();
       LocalUsername.reset();
