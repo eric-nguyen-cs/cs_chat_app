@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { LocalToken, LocalUsername } from "../localStorage";
 import { AuthContext, AuthContextType } from "./authContext";
 import { apiUrl } from "@/services/environment";
@@ -9,19 +9,20 @@ type Props = {
   children: ReactNode;
 };
 
-export const AuthProvider: React.FC<Props> = (props) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
+function getStoredAuth() {
+  const storedUsername = LocalUsername.get();
+  const storedToken = LocalToken.get();
+  return storedToken
+    ? { storedUsername, storedToken }
+    : { storedToken: null, storedUsername: null };
+}
 
-  useEffect(() => {
-    if (token) return;
-    const storedUsername = LocalUsername.get();
-    const storedToken = LocalToken.get();
-    if (storedToken) {
-      setToken(storedToken);
-      setUsername(storedUsername);
-    }
-  }, []);
+export const AuthProvider: React.FC<Props> = (props) => {
+  // Get stored auth from local storage when app starts
+  const { storedToken, storedUsername } = useMemo(() => getStoredAuth(), []);
+
+  const [token, setToken] = useState<string | null>(storedToken);
+  const [username, setUsername] = useState<string | null>(storedUsername);
 
   const contextValue: AuthContextType = {
     username,

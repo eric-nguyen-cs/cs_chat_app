@@ -10,13 +10,11 @@ const AuthButtons: React.FC<AuthButtonsProps> = ({ className }) => {
   return (
     <>
       {username ? (
-        <div className={cn(className, "flex items-center")}>
-          <p className="mr-2 text-xs">
+        <div className={cn(className, "flex items-center gap-6")}>
+          <p className="text-xs">
             Logged as <span className="font-bold text-base">{username}</span>
           </p>
-          <Button className="mr-4" onClick={() => logout()}>
-            Log out
-          </Button>
+          <Button onClick={() => logout()}>Log out</Button>
         </div>
       ) : (
         <div className={cn("flex gap-3", className)}>
