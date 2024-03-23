@@ -2,22 +2,25 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { apiUrl } from "@/services/environment";
+import { useAuthContext } from "@/services/auth";
+import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function Login() {
+  const { login } = useAuthContext();
+  const router = useRouter();
+
   const sendLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await fetch(apiUrl + "/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      await login({
         username: event.currentTarget.username.value,
         password: event.currentTarget.password.value,
-      }),
-    }).then((res) => console.log(res.json()));
+      });
+      await router.push("/");
+    } catch {
+      console.error("Error while trying to log in");
+    }
   };
 
   return (

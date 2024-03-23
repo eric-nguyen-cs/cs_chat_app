@@ -1,7 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { LocalToken, LocalUsername } from '../localStorage';
-import { AuthContext, AuthContextType } from './authContext';
-import { apiUrl } from '@/services/environment';
+"use client";
+
+import { ReactNode, useEffect, useState } from "react";
+import { LocalToken, LocalUsername } from "../localStorage";
+import { AuthContext, AuthContextType } from "./authContext";
+import { apiUrl } from "@/services/environment";
 
 type Props = {
   children: ReactNode;
@@ -26,16 +28,16 @@ export const AuthProvider: React.FC<Props> = (props) => {
     token,
     login: async ({ username, password }) => {
       if (username.length == 0) {
-        throw new Error('Username was not provided');
+        throw new Error("Username was not provided");
       }
       if (password.length == 0) {
-        throw new Error('Password was not provided');
+        throw new Error("Password was not provided");
       }
       try {
         const body = { username, password };
         const res = await fetch(`${apiUrl}/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
         const { username: resUsername, token: resToken } = await res.json();
