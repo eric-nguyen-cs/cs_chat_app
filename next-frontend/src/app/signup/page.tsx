@@ -45,9 +45,19 @@ export default function Login() {
               placeholder="Password"
               className="mb-4"
             />
-            <Button type="submit" className="w-16">
-              Submit
-            </Button>
+            <div className="flex justify-between items-center">
+              <Button type="submit">Submit</Button>
+              <p className="text-xs text-gray-600">
+                or
+                <Button
+                  variant="link"
+                  className="p-0 pl-2"
+                  onClick={() => router.push("/login")}
+                >
+                  Login
+                </Button>
+              </p>
+            </div>
           </form>
         </div>
       </div>

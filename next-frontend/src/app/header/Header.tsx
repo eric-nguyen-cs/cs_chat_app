@@ -1,38 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuthContext } from "@/services/auth";
-import Link from "next/link";
 
 interface AuthButtonsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const AuthButtons: React.FC<AuthButtonsProps> = ({ className }) => {
   const { username, logout } = useAuthContext();
   return (
-    <>
-      {username ? (
-        <div className={cn(className, "flex items-center gap-6")}>
-          <p className="text-xs">
-            Logged as <span className="font-bold text-base">{username}</span>
-          </p>
-          <Button onClick={() => logout()}>Log out</Button>
-        </div>
-      ) : (
-        <div className={cn("flex gap-3", className)}>
-          <Link
-            className="h-9 px-4 py-2 rounded-md bg-primary text-primary-foreground shadow hover:bg-primary/90"
-            href={"/signup"}
-          >
-            Sign Up
-          </Link>
-          <Link
-            className="h-9 px-4 py-2 rounded-md bg-primary text-primary-foreground shadow hover:bg-primary/90"
-            href={"/login"}
-          >
-            Log In
-          </Link>
-        </div>
-      )}
-    </>
+    <div className={cn(className, "flex items-center gap-6")}>
+      <p className="text-xs">
+        Logged as <span className="font-bold text-base">{username}</span>
+      </p>
+      <Button onClick={() => logout()}>Log out</Button>
+    </div>
   );
 };
 

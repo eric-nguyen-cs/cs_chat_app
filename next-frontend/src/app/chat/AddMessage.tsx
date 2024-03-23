@@ -22,7 +22,6 @@ export function AddMessage({ socket }: { socket: Socket }) {
   });
 
   const onSubmit = (values: z.infer<typeof newMessageSchema>) => {
-    console.log("Sending message");
     socket.emit("sendMessage", values.newMessage);
     form.reset();
   };

@@ -72,7 +72,6 @@ io.on("connection", (socket) => {
 
   // Verify JWT token sent by the client
   const token = socket.handshake.auth.token as string;
-  console.log("Token:", token);
   if (token) {
     try {
       const decoded = jwt.verify(token, secretKey) as DecodedToken;
