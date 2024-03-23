@@ -1,13 +1,9 @@
 "use client";
 
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { PropsWithChildren, useMemo, useState } from "react";
 import { LocalToken, LocalUsername } from "../localStorage";
 import { AuthContext, AuthContextType } from "./authContext";
 import { apiUrl } from "@/services/environment";
-
-type Props = {
-  children: ReactNode;
-};
 
 function getStoredAuth() {
   const storedUsername = LocalUsername.get();
@@ -17,7 +13,7 @@ function getStoredAuth() {
     : { storedToken: null, storedUsername: null };
 }
 
-export const AuthProvider: React.FC<Props> = (props) => {
+export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   // Get stored auth from local storage when app starts
   const { storedToken, storedUsername } = useMemo(() => getStoredAuth(), []);
 
@@ -82,8 +78,6 @@ export const AuthProvider: React.FC<Props> = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {props.children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };

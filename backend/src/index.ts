@@ -35,6 +35,10 @@ let currentMessageId = 1;
 const messages: Message[] = [];
 const users: UserWithPassword[] = [];
 
+const createToken = (username: string) => {
+  return jwt.sign({ username }, secretKey, { expiresIn: "2h" });
+};
+
 app.post("/signup", (req, res) => {
   const newUser: UserWithPassword = req.body;
   // Check if the username already exists
@@ -42,9 +46,9 @@ app.post("/signup", (req, res) => {
   if (existingUser) {
     return res.status(400).send("Username already exists");
   }
-  // Add user to the users array (in a real application, you'd likely hash the password before storing it)
   users.push(newUser);
-  res.send({ username: newUser.username } as User);
+  const token = createToken(newUser.username);
+  res.send({ username: newUser.username, token });
 });
 
 app.post("/login", (req, res) => {
@@ -55,9 +59,7 @@ app.post("/login", (req, res) => {
   );
   if (user) {
     // Create a JWT token with the user's username as the payload
-    const token = jwt.sign({ username: user.username }, secretKey, {
-      expiresIn: "2h",
-    });
+    const token = createToken(username);
     // Send the JWT token to the user in the response
     res.json({ username, token });
   } else {
@@ -70,6 +72,7 @@ io.on("connection", (socket) => {
 
   // Verify JWT token sent by the client
   const token = socket.handshake.auth.token as string;
+  console.log("Token:", token);
   if (token) {
     try {
       const decoded = jwt.verify(token, secretKey) as DecodedToken;

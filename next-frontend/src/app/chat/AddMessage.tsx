@@ -7,12 +7,13 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Socket } from "socket.io-client";
 
 const newMessageSchema = z.object({
   newMessage: z.string().trim().min(1),
 });
 
-export function AddMessage() {
+export function AddMessage({ socket }: { socket: Socket }) {
   const form = useForm<z.infer<typeof newMessageSchema>>({
     resolver: zodResolver(newMessageSchema),
     defaultValues: {
@@ -21,7 +22,9 @@ export function AddMessage() {
   });
 
   const onSubmit = (values: z.infer<typeof newMessageSchema>) => {
-    console.log(values);
+    console.log("Sending message");
+    socket.emit("sendMessage", values.newMessage);
+    form.reset();
   };
 
   return (
