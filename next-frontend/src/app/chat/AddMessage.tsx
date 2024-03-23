@@ -26,6 +26,13 @@ export function AddMessage({ socket }: { socket: Socket }) {
     form.reset();
   };
 
+  const onEnter = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      form.handleSubmit(onSubmit)();
+    }
+  };
+
   return (
     <Form {...form}>
       <form
@@ -38,7 +45,11 @@ export function AddMessage({ socket }: { socket: Socket }) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="Type your message here." {...field} />
+                <Textarea
+                  placeholder="Type your message here."
+                  onKeyDown={onEnter}
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
