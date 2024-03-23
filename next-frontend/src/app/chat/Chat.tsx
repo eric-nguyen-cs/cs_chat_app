@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { ChatMessage } from "./ChatMessage";
-import { Message } from "@/types";
 import { useSocket } from "@/services/socket";
 
 export const Chat = () => {
