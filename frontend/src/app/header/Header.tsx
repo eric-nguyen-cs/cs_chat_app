@@ -7,7 +7,7 @@ interface AuthButtonsProps extends React.HTMLAttributes<HTMLDivElement> {}
 const AuthButtons: React.FC<AuthButtonsProps> = ({ className }) => {
   const { username, logout } = useAuthContext();
   return (
-    <div className={cn(className, "flex items-center gap-6")}>
+    <div className={cn("flex items-center gap-6", className)}>
       <p className="text-xs">
         Logged as <span className="font-bold text-base">{username}</span>
       </p>
