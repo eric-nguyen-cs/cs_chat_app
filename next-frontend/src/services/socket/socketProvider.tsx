@@ -31,6 +31,7 @@ export const SocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setSocket(newSocket);
 
     return () => {
+      setMessages([]);
       newSocket.off("newMessages", addMessages);
       newSocket.off("deletedMessage", deleteMessage);
       newSocket.disconnect();
