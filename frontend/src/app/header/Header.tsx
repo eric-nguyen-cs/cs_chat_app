@@ -18,12 +18,12 @@ const AuthButtons: React.FC<AuthButtonsProps> = ({ className }) => {
 
 export default function Header() {
   return (
-    <div className="z-10 w-full items-center justify-between font-mono text-sm lg:flex">
+    <nav className="z-10 w-full items-center justify-between font-mono text-sm lg:flex">
       <div className="fixed left-0 top-0 flex w-full border-b items-center justify-between border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 px-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
         <p>CentraleSupélec Chat App</p>
         <AuthButtons className="lg:hidden" />
       </div>
       <AuthButtons className="hidden lg:flex" />
-    </div>
+    </nav>
   );
 }
