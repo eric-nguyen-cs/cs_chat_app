@@ -5,7 +5,7 @@ export const Chat = () => {
   const { messages } = useSocket();
   return (
     <section className="w-full flex flex-col gap-8">
-      <h2 className="font-semibold text-xl">Chat with your follow students!</h2>
+      <h2 className="font-semibold text-xl">Chat with your fellow students!</h2>
       <div className="flex flex-col gap-4">
         {messages.length === 0 ? (
           <p className="text-gray-600">No messages yet</p>

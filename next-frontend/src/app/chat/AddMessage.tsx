@@ -46,7 +46,7 @@ export function AddMessage({ socket }: { socket: Socket }) {
             <FormItem>
               <FormControl>
                 <Textarea
-                  placeholder="Type your message here."
+                  placeholder="Type your message here"
                   onKeyDown={onEnter}
                   {...field}
                 />
