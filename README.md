@@ -6,6 +6,13 @@
 - Charles Perier
 - Paul Rousseau
 
+## How to access the app
+
+- The frontend is hosted on Vercel at [https://cs-chat-app.vercel.app/](https://cs-chat-app.vercel.app)
+- The backend is hosted on Render at [https://cs-chat-app-backend.onrender.com/](https://cs-chat-app-backend.onrender.com)
+
+You can also run the app locally by running `npm run dev` in the `frontend` and `backend` directories.
+
 ## Features
 
 - Authentication with a username and a password (no email verification): you can create an account (with a unique username), log in and log out
