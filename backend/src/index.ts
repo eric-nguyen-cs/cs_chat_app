@@ -4,12 +4,12 @@ import jwt from "jsonwebtoken";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import type {
-    Message,
-    UserWithPassword,
-    ServerToClientEvents,
-    ClientToServerEvents,
-    DecodedToken,
-  } from "./types";
+  Message,
+  UserWithPassword,
+  ServerToClientEvents,
+  ClientToServerEvents,
+  DecodedToken,
+} from "./types";
 
 // Secret key used to sign JWT tokens
 const secretKey = "verySecretKey";
@@ -101,3 +101,5 @@ const port = 8000;
 httpServer.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+export { app, io };
